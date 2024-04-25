@@ -4,13 +4,13 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'index.html')
 
-def shop_details(reqeust):
+def shopDetails(reqeust):
     return render(reqeust, 'shop-details.html')
 
-def shop_grid(request):
+def shopGrid(request):
     return render(request, 'shop-grid.html')
 
-def shoping_cart(request):
+def shopingCart(request):
     return render(request, 'shoping-cart.html')
 
 def contact(request):
@@ -19,7 +19,7 @@ def contact(request):
 def blog(request):
     return render(request, 'blog.html')
 
-def blog_details(request):
+def blogDetails(request):
     return render(request, 'blog-details.html')
 
 def checkout(request):
@@ -27,3 +27,9 @@ def checkout(request):
 
 def main(request):
     return render(request, 'main.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def registration(request):
+    return render(request, 'registration.html')
