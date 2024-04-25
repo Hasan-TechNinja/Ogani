@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
+from django.contrib.auth import authenticate, login, logout
+from . form import CustomerRegistrationForm
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -31,5 +35,19 @@ def main(request):
 def login(request):
     return render(request, 'login.html')
 
-def registration(request):
-    return render(request, 'registration.html')
+class CustomerRegistrationView(View):
+    def get(self, request):
+        form = CustomerRegistrationForm()
+        return render(request, 'registration.html', locals())
+    
+    def post(self, request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Congratulations Successfully registtration done')
+        return render(request, 'registration.html', locals())
+    
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You were logged out!"))
+    return redirect('home')

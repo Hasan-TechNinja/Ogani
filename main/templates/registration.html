@@ -1,7 +1,37 @@
-{% extends "base.html" %}
-{% block title %}Registration{% endblock title %}
-{% block content %}
-<hr><br><br><br><br>
-<div class="text-center"><h2>Registration here</h2></div>
-<br><br><br><br><br> <hr>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Creation Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/usercf.css" %}">
+    <link rel="stylesheet" href="{% static "css/login.css" %}">
+    <!-- Move the {% load static %} tag here for better organization -->
+</head>
+<body>
+    <h2>User Creation Form</h2>
+    <form action="" method="POST" class = 'usercf'>
+        {% if messages %}
+        {% for messages in messages %}
+        <p {% if message.tags %} class='alert alert-{{message.tags}} mb5'>{{messages}} {% endif %}</p>
+        {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <!-- Include {% csrf_token %} for CSRF protection -->
+        {% for fm in form %}
+            <div>
+                {{ fm.label_tag }}
+                {{ fm }}
+                {{ fm.errors|striptags }} 
+                <br><br>
+            </div>
+            {% endfor %}
+            <!-- Wrap each form field and its label in a div for better structure -->
+            <hr>
+        <input type="submit" value="Sing up" class='singup'>
+        <button class='login'><a href="{% url "login" %}"> Sing In </a></button>
+        {% comment %} <a href="{% url "login" %}">Login</a> {% endcomment %}
+    </form>
+</body>
+</html>

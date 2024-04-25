@@ -1,10 +1,37 @@
-{% extends "base.html" %}
-{% block title %}Login{% endblock title %}
-{% block content %}
-<hr><br><br><br>
-<div class="registration text-center">
-    <div class="text-center my-3"><h2>Login here</h2></div>
-    <div class="btn btn-primary text-center"><a href="{% url "registration" %}">Registration</a></div>
-</div>
-<br><br><br><hr>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/login.css" %}">
+    <!-- Move the {% load static %} tag here for better organization -->
+</head>
+<body>
+    <h2>Login</h2>
+    <div  class = 'logins'>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }} 
+                <small class="text-danger"> {{ field.error | striptags }}</small>
+                <br> <br>
+            </div>
+            {% endfor %}
+            <small><a href="#">Forgot Password</a></small>
+            <input type="submit" value='Login' class='login' > <br> <br>
+            <hr>
+            <a href="{% url 'registration' %}">Create new account</a>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <p class="aleart aleart_danger">{{error}}</p>
+            {% endfor %}
+            {% endif %}
+        </form>
+        {% comment %} <input type="submit" value="Sing up" href='{% url "userCF" %}' class='singup'> {% endcomment %}
+    </div>
+</body>
+</html>
