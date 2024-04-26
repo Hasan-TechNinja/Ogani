@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 from . form import LoginForm
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', views.home, name = 'home'),
     path('shoDetails/', views.shopDetails, name='shopDetails'),
     path('shopGrid/', views.shopGrid, name = 'shopGrid'),
