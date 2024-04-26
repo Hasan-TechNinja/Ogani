@@ -67,7 +67,7 @@
                 <li><a href="{% url "shopGrid" %}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="{% url "shopDetails" %}">Shop Details</a></li>
+                        {% comment %} <li><a href="{% url "shopDetails" %}">Product Details</a></li> {% endcomment %}
                         <li><a href="{% url "shopingCart" %}">Shoping Cart</a></li>
                         <li><a href="{% url "checkout" %}">Check Out</a></li>
                         <li><a href="{% url "blogDetails" %}">Blog Details</a></li>
@@ -149,7 +149,7 @@
                             <li><a href="{% url "shopGrid" %}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="{% url "shopDetails" %}">Shop Details</a></li>
+                                    {% comment %} <li><a href="{% url "shopDetails" %}">Shop Details</a></li> {% endcomment %}
                                     <li><a href="{% url "shopingCart" %}">Shoping Cart</a></li>
                                     <li><a href="{% url "checkout" %}">Check Out</a></li>
                                     <li><a href="{% url "blogDetails" %}">Blog Details</a></li>

@@ -1,14 +1,17 @@
-from django.contrib import admin
+
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from . form import LoginForm
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', views.home, name = 'home'),
-    path('shoDetails/', views.shopDetails, name='shopDetails'),
-    path('shopGrid/', views.shopGrid, name = 'shopGrid'),
+    # path('/a/', views.home, name = 'home'),
+    path('', views.HomeView.as_view(), name = 'home'),
+    path('shoDetails/<int:pk>/', views.shopDetailsView.as_view(), name='shopDetails'),
+    path('shopGrid/', views.shopGridView.as_view(), name = 'shopGrid'),
     path('shopingCart', views.shopingCart, name = 'shopingCart'),
     path('contact/', views.contact, name = 'contact'),
     path('blog/', views.blog, name = 'blog'),
@@ -18,4 +21,4 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name="login.html", authentication_form = LoginForm), name = 'login'),
     path('registration/', views.CustomerRegistrationView.as_view(), name = 'registration'),
     path('logout/', views.logout_user, name='logout'),
-]
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

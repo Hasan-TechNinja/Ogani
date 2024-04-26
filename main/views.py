@@ -3,16 +3,39 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from . form import CustomerRegistrationForm
 from django.contrib import messages
+from . models import Product
 
 # Create your views here.
-def home(request):
-    return render(request, 'index.html')
 
-def shopDetails(reqeust):
-    return render(reqeust, 'shop-details.html')
+class HomeView(View):
+    def get(self, request):
+        all = Product.objects.all()
+        fAll = Product.objects.all()[:3]
+        sAll = Product.objects.all()[4:7]
+        lAll = Product.objects.all()[7:10]
+        llAll = Product.objects.all()[2:5]
+        slAll = Product.objects.all()[5:8]
+        return render(request, 'index.html', locals())
+    
+    
+class shopDetailsView(View):
+    def get(self, request, pk):
+        if request.user.is_authenticated:
+            sd = Product.objects.get(pk = pk)
+            all = Product.objects.all()
+            rl = Product.objects.filter(category=sd.category).exclude(pk=pk)
+            return render(request, 'shop-details.html', locals())
+        else:
+            pass
 
-def shopGrid(request):
-    return render(request, 'shop-grid.html')
+    
+class shopGridView(View):
+    def get(self, request):
+        all = Product.objects.all()[:12]
+        fAll = Product.objects.all()[:3]
+        sAll = Product.objects.all()[4:7]
+        dAll = Product.objects.all()[5:11]
+        return render(request, 'shop-grid.html', locals())
 
 def shopingCart(request):
     return render(request, 'shoping-cart.html')

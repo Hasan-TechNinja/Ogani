@@ -30,23 +30,24 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="{% static "img/product/details/product-details-1.jpg" %}" alt="">
+                                src="{{sd.image.url}}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
-                                src="img/product/details/thumb-1.jpg" alt="">
+                            <img data-imgbigurl="{sd.image.url}}"
+                                src="{{sd.image.url}}" alt="">
                             <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                src="img/product/details/thumb-2.jpg" alt="">
+                                src="{{sd.image.url}}" alt="">
                             <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                src="img/product/details/thumb-3.jpg" alt="">
+                                src="{{sd.image.url}}" alt="">
                             <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                src="{% static "img/product/details/thumb-4.jpg" %}" alt="">
+                                src="{{sd.image.url}}" alt="">
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <h3>Vetgetable’s Package</h3>
+                        <h3>{{sd.name}}</h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -55,10 +56,8 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">$50.00</div>
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                            vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                        <div class="product__details__price">${{sd.selling_price}}</div>
+                        <p>{{sd.Products_Infomation}}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
@@ -179,9 +178,10 @@
                 </div>
             </div>
             <div class="row">
+                {% for p in rl %}
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="{% static "img/product/product-1.jpg" %}">
+                        <div class="product__item__pic set-bg" data-setbg="{{p.image.url}} ">
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -189,12 +189,13 @@
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="#">{{p.name}}</a></h6>
+                            <h5>${{p.selling_price}}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                {% endfor %}
+                {% comment %} <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="{% static "img/product/product-2.jpg" %}">
                             <ul class="product__item__pic__hover">
@@ -238,7 +239,7 @@
                             <h5>$30.00</h5>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </section>

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'adminlte3',
+    'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,10 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    # General use templates & template tags (should appear first)
-    'adminlte3',
-     # Optional: Django admin theme (must be before django.contrib.admin)
-    'adminlte3_theme',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +124,7 @@ MEDIA_ROOT = BASE_DIR/'media'
 LOGIN_REDIRECT_URL = 'home'
 import os
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
