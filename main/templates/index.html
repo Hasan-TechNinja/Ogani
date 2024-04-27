@@ -41,9 +41,10 @@
                 </div>
             </div>
             <div class="row featured__filter">
+                {% for p in products %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-1.jpg" %}">
+                        <div class="featured__item__pic set-bg" data-setbg="{{p.image.url}}">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -51,14 +52,14 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="{% url "shopDetails" p.id %}">{{p.name}}</a></h6>
+                            <h5>${{p.selling_price}}</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-2.jpg" %}">
+                        <div class="featured__item__pic set-bg" data-setbg="{{p.image.url}}">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -66,12 +67,13 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="#">{{p.name}}</a></h6>
+                            <h5>${{p.selling_price}}</h5>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                {% comment %} <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-2.jpg" %}">
                             <ul class="featured__item__pic__hover">
@@ -160,7 +162,7 @@
                             <h5>$30.00</h5>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </section>
@@ -297,7 +299,7 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 {% for p in llAll %}
-                                <a href="#" class="latest-product__item">
+                                <a href="{% url "shopDetails" p.id %}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{p.image.url}}" alt="">
                                     </div>
@@ -328,7 +330,7 @@
                             </div>
                             <div class="latest-prdouct__slider__item">
                                 {% for p in slAll %}
-                                <a href="#" class="latest-product__item">
+                                <a href="{% url "shopDetails" p.id %}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{p.image.url}}" alt="">
                                     </div>

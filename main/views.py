@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, get_object_or_404
 from . form import CustomerRegistrationForm
 from django.urls import reverse
 from django.contrib import messages
 from . models import Product,Cart
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -37,11 +39,6 @@ class shopGridView(View):
         sAll = Product.objects.all()[4:7]
         dAll = Product.objects.all()[5:11]
         return render(request, 'shop-grid.html', locals())
-    
-from django.views import View
-from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
-from .models import Product, Cart
 
 class shopingCartView(View):
     def get(self, request):
@@ -108,3 +105,7 @@ def show_cart(request):
         user = request.user
         cart = Cart.objects.filter(user=user)
         return redirect('/shopingCart')
+    
+def all(request):
+    products = Product.objects.all()[:8]
+    return render(request, 'index.html', locals)
