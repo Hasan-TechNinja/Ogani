@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from . form import CustomerRegistrationForm
+from django.urls import reverse
 from django.contrib import messages
-from . models import Product
+from . models import Product,Cart
 
 # Create your views here.
 
@@ -26,7 +27,7 @@ class shopDetailsView(View):
             rl = Product.objects.filter(category=sd.category).exclude(pk=pk)
             return render(request, 'shop-details.html', locals())
         else:
-            pass
+            return redirect(f"{reverse('login')}?next={request.path}")
 
     
 class shopGridView(View):
@@ -36,9 +37,36 @@ class shopGridView(View):
         sAll = Product.objects.all()[4:7]
         dAll = Product.objects.all()[5:11]
         return render(request, 'shop-grid.html', locals())
+    
+from django.views import View
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import Product, Cart
 
-def shopingCart(request):
-    return render(request, 'shoping-cart.html')
+class shopingCartView(View):
+    def get(self, request):
+        # Define context explicitly
+        context = {
+            'user': request.user,
+        }
+        return render(request, 'shoping-cart.html', context)
+
+    def post(self, request):
+        user = request.user
+        product_id = request.POST.get('prod_id')
+        # Use get_object_or_404 to ensure the product exists
+        product = get_object_or_404(Product, id=product_id)
+        
+        # Check if a similar entry already exists to avoid duplicates
+        cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+        
+        # Define context explicitly
+        context = {
+            'cart_item': cart_item,
+            'created': created,  # True if new item added, False if already in cart
+        }
+        return render(request, 'shoping-cart.html', context)
+
 
 def contact(request):
     return render(request, 'contact.html')
@@ -74,3 +102,9 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You were logged out!"))
     return redirect('home')
+
+def show_cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        return redirect('/shopingCart')
