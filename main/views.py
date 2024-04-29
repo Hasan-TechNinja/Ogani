@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from . form import CustomerRegistrationForm
 from django.urls import reverse
 from django.contrib import messages
-from . models import Product,Cart
+from . models import *
 from django.http import JsonResponse
 
 # Create your views here.
@@ -18,6 +18,9 @@ class HomeView(View):
         lAll = Product.objects.all()[7:10]
         llAll = Product.objects.all()[2:5]
         slAll = Product.objects.all()[5:8]
+        products = all
+        category = Product.objects.all()
+    
         return render(request, 'index.html', locals())
     
     
@@ -51,16 +54,12 @@ class shopingCartView(View):
     def post(self, request):
         user = request.user
         product_id = request.POST.get('prod_id')
-        # Use get_object_or_404 to ensure the product exists
         product = get_object_or_404(Product, id=product_id)
-        
-        # Check if a similar entry already exists to avoid duplicates
         cart_item, created = Cart.objects.get_or_create(user=user, product=product)
-        
-        # Define context explicitly
+    
         context = {
             'cart_item': cart_item,
-            'created': created,  # True if new item added, False if already in cart
+            'created': created, 
         }
         return render(request, 'shoping-cart.html', context)
 
@@ -104,8 +103,17 @@ def show_cart(request):
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
-        return redirect('/shopingCart')
+        # return render(request, 'shoping-cart.html', locals())
+        return redirect('/cart')
     
-def all(request):
-    products = Product.objects.all()[:8]
-    return render(request, 'index.html', locals)
+def Meat(request):
+    all = Product.objects.all()
+    fAll = Product.objects.all()[:3]
+    sAll = Product.objects.all()[4:7]
+    lAll = Product.objects.all()[7:10]
+    llAll = Product.objects.all()[2:5]
+    slAll = Product.objects.all()[5:8]
+    products = all
+    pc = Category.objects.get(name = 'Meat')
+    p = Product.objects.filter(category = pc)
+    return render(request, 'Meat.html', locals())

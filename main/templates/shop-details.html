@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% load static %}
 {% block title %}Shop Details{% endblock title %}
 {% block content %}
@@ -54,7 +54,7 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+                            <span>(4 reviews)</span>
                         </div>
                         <div class="product__details__price">${{sd.selling_price}}</div>
                         <p>{{sd.Products_Infomation}}</p>
@@ -66,8 +66,7 @@
                             </div>
                         </div>
                         {% comment %} <a href="{% url "shopingCart" %}" class="primary-btn">ADD TO CARD</a> {% endcomment %}
-                        <form method='POST' action="{% url "shopingCart" %}" class='d-inline'>
-                            {% csrf_token %}
+                        <form action="/shopingCart" class='d-inline'>
                             <input type="hidden" name="prod_id" value="{{sd.id}}" id="prod_id">
                             <button type="submit" class = "btn-secondary shadow px-5 py-2">ADD TO CART</button>
                         </form>
@@ -194,7 +193,7 @@
                             </ul>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="#">{{p.name}}</a></h6>
+                            <h6><a href="{% url "shopDetails" p.id %}">{{p.name}}</a></h6>
                             <h5>${{p.selling_price}}</h5>
                         </div>
                     </div>

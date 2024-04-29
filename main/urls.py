@@ -7,8 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    # path('/a/', views.home, name = 'home'),
+
     path('', views.HomeView.as_view(), name = 'home'),
     path('shoDetails/<int:pk>/', views.shopDetailsView.as_view(), name='shopDetails'),
     path('shopGrid/', views.shopGridView.as_view(), name = 'shopGrid'),
@@ -22,5 +21,5 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name="login.html", authentication_form = LoginForm), name = 'login'),
     path('registration/', views.CustomerRegistrationView.as_view(), name = 'registration'),
     path('logout/', views.logout_user, name='logout'),
-    path('all/', views.all, name = 'all')
+    path('meat/', views.Meat, name='meat'),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
