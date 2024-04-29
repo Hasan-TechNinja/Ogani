@@ -59,3 +59,6 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+    
+    def linetotal(self):
+        return self.product.selling_price * self.quantity

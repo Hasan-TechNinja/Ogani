@@ -36,9 +36,10 @@
                             <li data-filter=".fresh-meat"><a href="{% url "meat" %}" class='text-secondary'>Fresh Meat</a></li>
                             <li data-filter=".vegetables"><a href="" class='text-secondary'>Vegetables</a></li>
                             <li data-filter=".fastfood"><a href="" class='text-secondary'>Fastfood</a></li> {% endcomment %}
-                            {% for cat in category %}
-                            <li data-filter=".fastfood"><a href="#" class='text-secondary'>{{cat.category}}</a></li>
+                            {% for cat in unique_categories %}
+                                <li data-filter=".{{ cat.name|lower }}"><a href="#" class='text-secondary'>{{ cat.name }}</a></li>
                             {% endfor %}
+
                         </ul>
                     </div>
                 </div>

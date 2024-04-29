@@ -14,13 +14,19 @@ class HomeView(View):
     def get(self, request):
         all = Product.objects.all()
         fAll = Product.objects.all()[:3]
+        fAll = reversed(fAll)
         sAll = Product.objects.all()[4:7]
         lAll = Product.objects.all()[7:10]
         llAll = Product.objects.all()[2:5]
         slAll = Product.objects.all()[5:8]
         products = all
         category = Product.objects.all()
-    
+
+        unique_categories = Category.objects.values('name').distinct()
+       
+        for category in unique_categories:
+            print(category['name'])
+
         return render(request, 'index.html', locals())
     
     
@@ -45,11 +51,11 @@ class shopGridView(View):
 
 class shopingCartView(View):
     def get(self, request):
-        # Define context explicitly
-        context = {
-            'user': request.user,
-        }
-        return render(request, 'shoping-cart.html', context)
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        cart_totals = [item.linetotal() for item in cart]
+        print(Cart.linetotal)
+        return render(request, 'shoping-cart.html',  locals())
 
     def post(self, request):
         user = request.user

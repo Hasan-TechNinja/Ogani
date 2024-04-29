@@ -41,11 +41,12 @@
                                 <tr>
                                     {% for cart in cart %}
                                     <td class="shoping__cart__item">
-                                        <img src="{% url "cart.image.url" %}" alt="">
-                                        <h5>{{cart.name}}’s Package</h5>
+                                        <img src="{{ cart.product.image.url }}" height='100px' width='100px' alt="">
+                                        <h5>{{cart.product.name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        ${{cart.selling_price}}
+                                        
+                                        ${{cart.product.selling_price}}
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
@@ -55,7 +56,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        ${{cart.selling_price}}
+                                        ${{cart.linetotal}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="icon_close"></span>
