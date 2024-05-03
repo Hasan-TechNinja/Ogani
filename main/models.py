@@ -62,3 +62,10 @@ class Cart(models.Model):
     
     def linetotal(self):
         return self.product.selling_price * self.quantity
+    
+class Project(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+    logo = models.ImageField(upload_to='Project', blank=False, null=False)
+
+    def __str__(self):
+        return self.name

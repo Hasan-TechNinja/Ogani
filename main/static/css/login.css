@@ -1,6 +1,6 @@
 h2{
     text-align: center;
-    background-color: rgb(92, 92, 92);
+    background-color: rgb(75, 187, 77);
     margin-left: 38%;
     margin-right: 38%;
     border-radius: 60px;
@@ -8,7 +8,7 @@ h2{
 }
     
 .logins{
-    background-color: rgb(180, 175, 167);
+    background-color: rgb(18, 207, 81);
     margin-top: 35px;
     margin-left: 30%;
     padding-bottom: 17px;
@@ -22,7 +22,7 @@ h2{
 
 .login{
     margin-right: 50%px;
-    background-color: rgb(52, 116, 255);
+    background-color: rgb(119, 121, 125);
     color: white;
     padding-left: 13px;
     padding-right: 13px;

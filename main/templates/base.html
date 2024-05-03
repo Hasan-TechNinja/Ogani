@@ -33,9 +33,7 @@
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="#"><img src="{% static "img/logo.png" %}" alt=""></a>
-        </div>
+        <a href="#"><img src="{% static "img/logo.png" %}" alt=""></a>
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
@@ -141,6 +139,14 @@
                     <div class="header__logo">
                         <a href="{% url "home" %}"><img src="{% static "img/logo.png" %}" alt=""></a>
                     </div>
+                </div> 
+
+                <div class="col-lg-3">
+                    {% for project in projects %}
+                        <div class="header__logo">
+                            <a href="{% url "home" %}"><img src="{{ project.logo.url }}" alt="Project Logo"></a>
+                        </div>
+                    {% endfor %}
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
@@ -250,7 +256,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{% static "./index.html" %}"><img src="{% static "img/logo.png" %}" alt=""></a>
+                            {% for project in projects %}
+                            <a href="{% static "./index.html" %}"><img src="{{project.logo.url}}" alt=""></a>
+                            {% endfor %}
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

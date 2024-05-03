@@ -25,7 +25,8 @@ class HomeView(View):
         unique_categories = Category.objects.values('name').distinct()
        
         for category in unique_categories:
-            print(category['name'])
+            # print(category['name'])
+            pass
 
         return render(request, 'index.html', locals())
     
@@ -54,15 +55,15 @@ class shopingCartView(View):
         user = request.user
         cart = Cart.objects.filter(user=user)
         cart_totals = [item.linetotal() for item in cart]
-        print(Cart.linetotal)
         return render(request, 'shoping-cart.html',  locals())
 
     def post(self, request):
         user = request.user
         product_id = request.POST.get('prod_id')
         product = get_object_or_404(Product, id=product_id)
-        cart_item, created = Cart.objects.get_or_create(user=user, product=product)
-    
+        # cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+        created = Cart.objects.create(user=user, product = product)
+        cart_item = Cart.objects.filter(user=user)
         context = {
             'cart_item': cart_item,
             'created': created, 
@@ -123,3 +124,8 @@ def Meat(request):
     pc = Category.objects.get(name = 'Meat')
     p = Product.objects.filter(category = pc)
     return render(request, 'Meat.html', locals())
+
+def project(request):
+    projects = Project.objects.all()  # Fetch all Project instances
+    context = {'projects': projects}  # Create context with projects
+    return render(request, 'base.html', context) 
