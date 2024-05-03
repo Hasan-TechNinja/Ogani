@@ -9,3 +9,6 @@ admin.site.register(Cart)
 admin.site.register(Project)
 admin.site.register(Contact)
 admin.site.register(SUBSCRIBE)
+
+class SUBSCRIBE(admin.ModelAdmin):
+    list_display = ['id', 'email']

@@ -150,4 +150,27 @@ def project(request):
     messages.success(request, 'Congratulation for your subcriptions!')
     return redirect('home')
 
+def fresh_meat(request):
+    Productss = Product.objects.filter(department='Fresh Meat')
+    name = Product.objects.filter(department="Fresh Meat")[:1]
+    return render(request, 'Fresh_Meat.html', locals())
 
+def vegetables(request):
+    Productss = Product.objects.filter(department='Vegetables')
+    name = Product.objects.filter(department="Vegetables")[:1]
+    return render(request, 'Vegetables.html', locals())
+
+def Fruit_Nut_Gifts(request):
+    Productss = Product.objects.filter(department="Fruit & Nut Gifts")
+    name = Product.objects.filter(department="Fruit & Nut Gifts")[:1]
+    return render(request, 'Fruit_Nut_Gifts.html', locals())
+
+def Fresh_Berries(request):
+    Productss = Product.objects.filter(department="Fresh Berries")
+    name = Product.objects.filter(department="Fresh Berries")[:1]
+    return render(request, 'Fresh_Berries.html', locals())
+
+def fastfood(request):
+    Productss = Product.objects.filter(department="Fastfood")
+    name = Product.objects.filter(department="Fastfood")[:1]
+    return render(request, 'Fastfood.html', locals())
