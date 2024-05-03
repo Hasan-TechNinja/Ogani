@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 from . models import *
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -72,6 +73,21 @@ class shopingCartView(View):
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('emial')
+        message = request.POST.get('message')
+        user = request.user
+        data = {'name': name, 'user':user, 'message': message}
+        user_message = '''
+        From: {}
+        Name: {}
+        Comment: {}
+        '''.format(data['user'], data['name'], data['message'])
+        send_mail("New message recive by Ogani", user_message, "",["hasantechninja@gmail.com"])
+        contact_info = Contact(user=user, name=name, email=email, message=message)
+        contact_info.save()
+        messages.success(request, 'SMS Sent Successfully')
     return render(request, 'contact.html')
 
 def blog(request):
@@ -126,6 +142,12 @@ def Meat(request):
     return render(request, 'Meat.html', locals())
 
 def project(request):
-    projects = Project.objects.all()  # Fetch all Project instances
-    context = {'projects': projects}  # Create context with projects
-    return render(request, 'base.html', context) 
+    if request.user.is_authenticated:    
+        subscribe = request.POST.get('subscribe')
+    user = request.user
+    data = SUBSCRIBE(user=user, email=subscribe)
+    data.save()
+    messages.success(request, 'Congratulation for your subcriptions!')
+    return redirect('home')
+
+

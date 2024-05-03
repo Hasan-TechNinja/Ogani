@@ -75,6 +75,7 @@
                 <li><a href="{% url "contact" %}">Contact</a></li>
             </ul>
         </nav>
+        
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -250,6 +251,19 @@
 
     
     <!-- Footer Section Begin -->
+    {% if messages %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
     <footer class="footer spad">
         <div class="container">
             <div class="row">
@@ -289,11 +303,13 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
+                    
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
+                        <form action="{% url "subscribe" %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Enter your mail" name='subscribe'>
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
                         <div class="footer__widget__social">
