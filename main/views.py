@@ -174,3 +174,13 @@ def fastfood(request):
     Productss = Product.objects.filter(department="Fastfood")
     name = Product.objects.filter(department="Fastfood")[:1]
     return render(request, 'Fastfood.html', locals())
+
+def Ocean_Foods(request):
+    Productss = Product.objects.filter(department="Ocean Foods")
+    name = Product.objects.filter(department="Ocean Foods")[:1]
+    return render(request, 'Ocean_Foods.html', locals())
+
+def Butter_Eggs(request):
+    Productss = Product.objects.filter(department="Butter & Eggs")
+    name = Product.objects.filter(department="Butter & Eggs")[:1]
+    return render(request, 'Butter_Eggs.html', locals())

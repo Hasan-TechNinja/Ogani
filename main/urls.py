@@ -29,4 +29,6 @@ urlpatterns = [
     path('fruit/', views.Fruit_Nut_Gifts, name='fruit'),
     path('Fresh_Berries/', views.Fresh_Berries, name='Fresh_Berries'),
     path('Fastfood/', views.fastfood, name='Fastfood'),
+    path('Ocean_Foods/', views.Ocean_Foods, name='Ocean_Foods'),
+    path('Butter_Eggs/', views.Butter_Eggs, name='Butter_Eggs'),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
