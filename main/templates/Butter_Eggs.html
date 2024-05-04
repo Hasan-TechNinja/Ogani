@@ -66,7 +66,11 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                <h3 class='text-center text-danger'>Product not found</h3>
+                {% comment %} <i class="fa-light fa-cart-shopping"></i> {% endcomment %}
+                <div>
+                    <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
+                    <h3 class='text-center text-danger'>Product not found</h3>
+                </div>
                 {% endif %}
             </div>
         </div>

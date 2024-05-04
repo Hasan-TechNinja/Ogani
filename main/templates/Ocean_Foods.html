@@ -34,10 +34,6 @@
                             {% for p in name %}
                             <li class="active" data-filter="*">{{p.department}}</li>
                             {% endfor %}
-                           {% comment %} <li data-filter=".oranges"><a href="" class='text-secondary'>Oranges</a></li>
-                            <li data-filter=".fresh-meat"><a href="{% url "meat" %}" class='text-secondary'>Fresh Meat</a></li>
-                            <li data-filter=".vegetables"><a href="" class='text-secondary'>Vegetables</a></li>
-                            <li data-filter=".fastfood"><a href="" class='text-secondary'>Fastfood</a></li> {% endcomment %}
                             {% for p in Products %}
                                 <li data-filter=".{{ cat.name|lower }}"><a href="#" class='text-secondary'>{{ cat.name }}</a></li>
                             {% endfor %}
@@ -66,7 +62,10 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                <h3 class='text-center text-danger'>Product not found</h3>
+                <div>
+                    <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
+                    <h3 class='text-center text-danger'>Product not found</h3>
+                </div>
                 {% endif %}
             </div>
         </div>
