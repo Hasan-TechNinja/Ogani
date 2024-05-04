@@ -99,7 +99,25 @@ class Billing_Details(models.Model):
     zip = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True, null=True)
-    
+
 
     def __str__(self):
         return f"{self.user.username}"
+        
+class Billing_Detailss(models.Model):
+    usr = models.ForeignKey(User, on_delete=models.CASCADE)
+    f_name = models.CharField(max_length=100, blank=True, null=True)
+    l_name = models.CharField(max_length=100, blank=True, null=True)
+    cntry = models.CharField(max_length=10, blank=True, null=True)
+    adrs = models.CharField(max_length=200, blank=True, null=True)
+    lcl_adrs = models.CharField(max_length=200, blank=True, null=True)
+    cty = models.CharField(max_length=200, blank=True, null=True)
+    stte = models.CharField(max_length=100, blank=True, null=True)
+    zp = models.CharField(max_length=50, blank=True, null=True)
+    phne = models.CharField(max_length=20, blank=True, null=True)
+    emil = models.EmailField(max_length=100, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.usr.username}"

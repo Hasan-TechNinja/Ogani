@@ -10,6 +10,7 @@ admin.site.register(Project)
 admin.site.register(Contact)
 admin.site.register(SUBSCRIBE)
 admin.site.register(Billing_Details)
+admin.site.register(Billing_Detailss)
 
 class SUBSCRIBE(admin.ModelAdmin):
     list_display = ['id', 'email']

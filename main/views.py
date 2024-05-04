@@ -120,36 +120,45 @@ def blogDetails(request):
 # @login_required
 def checkout(request):
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        country = request.POST.get('country')
-        address = request.POST.get('address')
-        local_address = request.POST.get('local_address')
-        city = request.POST.get('city')
-        state = request.POST.get('state')
-        zip = request.POST.get('zip')
-        phone = request.POST.get('phone')
-        email = request.POST.get('email')
+        # Initialize variables from POST request
+        first_names = request.POST.get('first_name', '')  # Providing default values to avoid `UnboundLocalError`
+        last_name = request.POST.get('last_name', '')
+        country = request.POST.get('country', '')
+        address = request.POST.get('address', '')
+        local_address = request.POST.get('local_address', '')
+        city = request.POST.get('city', '')
+        state = request.POST.get('state', '')
+        zip = request.POST.get('zip', '')
+        phone = request.POST.get('phone', '')
+        email = request.POST.get('email', '')
 
-        data = Billing_Details(
-            user=request.user,
-            first_name=first_name,
-            last_name=last_name,
-            country=country,
-            address=address,
-            local_address=local_address,
-            city=city,
-            state=state,
-            zip=zip,
-            phone=phone,
-            email=email,
-        )
-        data.save()
-        
-        messages.success(request, 'Successfully added your address!')
-        return redirect('checkout')  
+        # Fetch the user and their cart
+        user = request.user
+        cart = Cart.objects.filter(user=user)
 
-    return render(request, 'checkout.html')
+        # Save Billing_Detailss for each item in the cart
+        for c in cart:
+            Billing_Detailss(
+                usr=user,
+                f_name=first_names,
+                l_name=last_name,
+                cntry=country,
+                adrs=address,
+                lcl_adrs=local_address,
+                cty=city,
+                stte=state,
+                zp=zip,
+                phne=phone,
+                emil=email,
+                product=c.product,
+                quantity=c.quantity,
+            ).save()
+            c.delete() 
+
+        return redirect('home')
+
+
+    return render(request, 'checkout.html', {}) 
 
 def main(request):
     return render(request, 'main.html')
