@@ -217,13 +217,15 @@
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <form action=" {% url "search" %}" method='GET'>
+                                    <input type="search" placeholder="What do yo u need?" name="quary" aria-label="Search">
+                                    <button type="submit" class="site-btn">SEARCH</button>
+                                 </form>
                             </form>
                         </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
+                                <i class="fa fa-phone"></i> 
                             </div>
                             <div class="hero__search__phone__text">
                                 <h5>+65 11.188.888</h5>

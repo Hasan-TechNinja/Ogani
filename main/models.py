@@ -83,3 +83,22 @@ class Contact(models.Model):
 class SUBSCRIBE(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     email = models.EmailField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}"
+
+class Billing_Details(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    country = models.CharField(max_length=10, blank=True, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    local_address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    zip = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}"

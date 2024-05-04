@@ -95,7 +95,60 @@ def blog(request):
 def blogDetails(request):
     return render(request, 'blog-details.html')
 
+# def checkout(request):
+#     if request.method=='POST':
+#         if request.user.is_authenticated:
+#             first_name = request.POST.get('first_name')
+#             last_name = request.POST.get('last_name')
+#             country = request.POST.get('country')
+#             address = request.POST.get('address')
+#             local_address = request.POST.get('local_address')
+#             city = request.POST.get('city')
+#             state = request.POST.get('state')
+#             zip = request.POST.get('zip')
+#             phone = request.POST.get('phone')
+#             email = request.POST.get('email')
+
+#             user = request.user
+#             data = Billing_Details(user = user, first_name = first_name, last_name = last_name, country = country, address = address,local_address = local_address, city = city, state = state, zip = zip, phone = phone, email = email )
+#             data.save()
+#             messages.success(request, 'Successfully address added!')
+#             return redirect('checkout')
+
+#     return render(request, 'checkout.html')
+
+# @login_required
 def checkout(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        local_address = request.POST.get('local_address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip = request.POST.get('zip')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+
+        data = Billing_Details(
+            user=request.user,
+            first_name=first_name,
+            last_name=last_name,
+            country=country,
+            address=address,
+            local_address=local_address,
+            city=city,
+            state=state,
+            zip=zip,
+            phone=phone,
+            email=email,
+        )
+        data.save()
+        
+        messages.success(request, 'Successfully added your address!')
+        return redirect('checkout')  
+
     return render(request, 'checkout.html')
 
 def main(request):
@@ -146,7 +199,7 @@ def project(request):
     user = request.user
     data = SUBSCRIBE(user=user, email=subscribe)
     data.save()
-    messages.success(request, 'Congratulation for your subcriptions!')
+    messages.success(request, 'Congratulation for your subscriptions!')
     return redirect('home')
 
 def fresh_meat(request):
@@ -203,3 +256,12 @@ def Fresh_Bananas(request):
     Productss = Product.objects.filter(department="Fresh Bananas")
     name = Product.objects.filter(department="Fresh Bananas")[:1]
     return render(request, 'Fresh_Bananas.html', locals())
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('quary')
+        if query:
+            product = Product.objects.filter(name__icontains=query)
+            return render(request, 'search', locals())
+        else:
+            return render(request, 'search.html', locals())

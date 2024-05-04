@@ -35,4 +35,5 @@ urlpatterns = [
     path('Papayaya_Crisps/', views.Fresh_Onion, name='Papayaya_Crisps'),
     path('Oatmeal/', views.Fresh_Onion, name='Oatmeal'),
     path('Fresh_Bananas/', views.Fresh_Onion, name='Fresh_Bananas'),
+    path('search/', views.search, name = 'search'),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
