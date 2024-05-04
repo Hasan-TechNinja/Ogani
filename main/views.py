@@ -26,7 +26,6 @@ class HomeView(View):
         unique_categories = Category.objects.values('name').distinct()
        
         for category in unique_categories:
-            # print(category['name'])
             pass
 
         return render(request, 'index.html', locals())
@@ -184,3 +183,23 @@ def Butter_Eggs(request):
     Productss = Product.objects.filter(department="Butter & Eggs")
     name = Product.objects.filter(department="Butter & Eggs")[:1]
     return render(request, 'Butter_Eggs.html', locals())
+
+def Fresh_Onion(request):
+    Productss = Product.objects.filter(department="Fresh Onion")
+    name = Product.objects.filter(department="Fresh Onion")[:1]
+    return render(request, 'Fresh_Onion.html', locals())
+
+def Papayaya_Crisps(request):
+    Productss = Product.objects.filter(department="Papaya & Crisps")
+    name = Product.objects.filter(department="Papaya & Crisps")[:1]
+    return render(request, 'Papayaya_Crisps.html', locals())
+
+def Oatmeal(request):
+    Productss = Product.objects.filter(department="Papaya & Crisps")
+    name = Product.objects.filter(department="Papaya & Crisps")[:1]
+    return render(request, 'Oatmeal.html', locals())
+
+def Fresh_Bananas(request):
+    Productss = Product.objects.filter(department="Fresh Bananas")
+    name = Product.objects.filter(department="Fresh Bananas")[:1]
+    return render(request, 'Fresh_Bananas.html', locals())

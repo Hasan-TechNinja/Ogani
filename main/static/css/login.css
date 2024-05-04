@@ -1,14 +1,14 @@
 h2{
     text-align: center;
-    background-color: rgb(75, 187, 77);
+    background-color: rgb(143, 161, 143);
     margin-left: 38%;
-    margin-right: 38%;
+    margin-right: 38%;  
     border-radius: 60px;
     color: aliceblue;
 }
     
 .logins{
-    background-color: rgb(18, 207, 81);
+    background-color: rgb(139, 148, 142);
     margin-top: 35px;
     margin-left: 30%;
     padding-bottom: 17px;
@@ -39,7 +39,7 @@ input{
 }
 a{
     text-decoration: none;
-    background-color: rgb(1, 143, 37);
+    background-color: rgb(180, 175, 167);
     border-radius: 6px;
     color: white;
     padding-left: 13px;
