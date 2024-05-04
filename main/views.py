@@ -257,11 +257,26 @@ def Fresh_Bananas(request):
     name = Product.objects.filter(department="Fresh Bananas")[:1]
     return render(request, 'Fresh_Bananas.html', locals())
 
+# def search(request):
+#     if request.method == 'GET':
+#         query = request.GET.get('query')
+#         if query:
+#             product = Product.objects.filter(name__icontains=query)
+#             return render(request, 'search', locals())
+#         else:
+#             return render(request, 'search.html', locals())
+        
 def search(request):
     if request.method == 'GET':
-        query = request.GET.get('quary')
+        query = request.GET.get('query')  
         if query:
-            product = Product.objects.filter(name__icontains=query)
-            return render(request, 'search', locals())
+            products = Product.objects.filter(name__icontains=query)
+            context = {
+                'products': products,
+                # 'query': query,  
+            }
+            return render(request, 'search.html', context)
         else:
-            return render(request, 'search.html', locals())
+            return render(request, 'search.html', {'error': 'No query provided'})
+    else:
+        return render(request, 'search.html', {'error': 'Invalid request method'})

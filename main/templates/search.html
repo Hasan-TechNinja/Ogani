@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Search{% endblock title %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                {% if products %}
+                {% for product in products %}
+                <div class="col-sm-4 text-center mb-4">
+                    <a href="{% url "shopDetails" product.id %}" class=btn>
+                        <div class="item">
+                            <img src="{{product.image.url}}" alt="" height='300' class="">
+                            <div class="fw-bold">{{product.name}}</div>
+                            <div class="fw-bold">Tk. {{product.selling_price}} <small class="fw-light text-decoration-line-through">{{product.discount_price}}</small></div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div>
+                    <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
+                    <h3 class='text-center text-danger'>Product not found</h3>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
