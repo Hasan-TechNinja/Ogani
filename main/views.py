@@ -46,6 +46,8 @@ class shopGridView(View):
     def get(self, request):
         all = Product.objects.all()[:12]
         fAll = Product.objects.all()[:3]
+        AAll = Product.objects.all()
+        n = str(len(AAll))
         sAll = Product.objects.all()[4:7]
         dAll = Product.objects.all()[5:11]
         return render(request, 'shop-grid.html', locals())
@@ -95,33 +97,10 @@ def blog(request):
 def blogDetails(request):
     return render(request, 'blog-details.html')
 
-# def checkout(request):
-#     if request.method=='POST':
-#         if request.user.is_authenticated:
-#             first_name = request.POST.get('first_name')
-#             last_name = request.POST.get('last_name')
-#             country = request.POST.get('country')
-#             address = request.POST.get('address')
-#             local_address = request.POST.get('local_address')
-#             city = request.POST.get('city')
-#             state = request.POST.get('state')
-#             zip = request.POST.get('zip')
-#             phone = request.POST.get('phone')
-#             email = request.POST.get('email')
-
-#             user = request.user
-#             data = Billing_Details(user = user, first_name = first_name, last_name = last_name, country = country, address = address,local_address = local_address, city = city, state = state, zip = zip, phone = phone, email = email )
-#             data.save()
-#             messages.success(request, 'Successfully address added!')
-#             return redirect('checkout')
-
-#     return render(request, 'checkout.html')
-
-# @login_required
 def checkout(request):
     if request.method == 'POST':
-        # Initialize variables from POST request
-        first_names = request.POST.get('first_name', '')  # Providing default values to avoid `UnboundLocalError`
+
+        first_names = request.POST.get('first_name', '') 
         last_name = request.POST.get('last_name', '')
         country = request.POST.get('country', '')
         address = request.POST.get('address', '')
@@ -132,11 +111,9 @@ def checkout(request):
         phone = request.POST.get('phone', '')
         email = request.POST.get('email', '')
 
-        # Fetch the user and their cart
         user = request.user
         cart = Cart.objects.filter(user=user)
 
-        # Save Billing_Detailss for each item in the cart
         for c in cart:
             Billing_Detailss(
                 usr=user,
@@ -187,7 +164,6 @@ def show_cart(request):
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
-        # return render(request, 'shoping-cart.html', locals())
         return redirect('/cart')
     
 def Meat(request):
@@ -266,14 +242,6 @@ def Fresh_Bananas(request):
     name = Product.objects.filter(department="Fresh Bananas")[:1]
     return render(request, 'Fresh_Bananas.html', locals())
 
-# def search(request):
-#     if request.method == 'GET':
-#         query = request.GET.get('query')
-#         if query:
-#             product = Product.objects.filter(name__icontains=query)
-#             return render(request, 'search', locals())
-#         else:
-#             return render(request, 'search.html', locals())
         
 def search(request):
     if request.method == 'GET':
@@ -281,8 +249,7 @@ def search(request):
         if query:
             products = Product.objects.filter(name__icontains=query)
             context = {
-                'products': products,
-                # 'query': query,  
+                'products': products, 
             }
             return render(request, 'search.html', context)
         else:
