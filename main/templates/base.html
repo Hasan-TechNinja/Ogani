@@ -214,8 +214,8 @@
                         <div class="hero__search__form">
                             <form action="{% url 'search' %}" method="GET">
                                 <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
+                                    <a href="{% url "home" %}">OGANI</a>
+                                    {% comment %} <span class="arrow_carrot-down"></span> {% endcomment %}
                                 </div>
                                 {% comment %} <form action=" {% url "search" %}" method='GET'>
                                     <input type="search" placeholder="What do yo u need?" name="query" aria-label="Search">
