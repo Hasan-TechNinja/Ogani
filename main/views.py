@@ -49,26 +49,28 @@ class shopGridView(View):
         sAll = Product.objects.all()[4:7]
         dAll = Product.objects.all()[5:11]
         return render(request, 'shop-grid.html', locals())
+    
 
-class shopingCartView(View):
-    def get(self, request):
-        user = request.user
-        cart = Cart.objects.filter(user=user)
-        cart_totals = [item.linetotal() for item in cart]
-        return render(request, 'shoping-cart.html',  locals())
 
-    def post(self, request):
-        user = request.user
-        product_id = request.POST.get('prod_id')
-        product = get_object_or_404(Product, id=product_id)
-        # cart_item, created = Cart.objects.get_or_create(user=user, product=product)
-        created = Cart.objects.create(user=user, product = product)
-        cart_item = Cart.objects.filter(user=user)
-        context = {
-            'cart_item': cart_item,
-            'created': created, 
-        }
-        return render(request, 'shoping-cart.html', context)
+# class shopingCartView(View):
+#     def get(self, request):
+#         user = request.user
+#         cart = Cart.objects.filter(user=user)
+#         cart_totals = [item.linetotal() for item in cart]
+#         return render(request, 'shoping-cart.html',  locals())
+
+#     def post(self, request):
+#         user = request.user
+#         product_id = request.POST.get('prod_id')
+#         product = get_object_or_404(Product, id=product_id)
+#         # cart_item, created = Cart.objects.get_or_create(user=user, product=product)
+#         created = Cart.objects.create(user=user, product = product)
+#         cart_item = Cart.objects.filter(user=user)
+#         context = {
+#             'cart_item': cart_item,
+#             'created': created, 
+#         }
+#         return render(request, 'shoping-cart.html', context)
 
 
 def contact(request):
@@ -158,10 +160,35 @@ def logout_user(request):
     messages.success(request, ("You were logged out!"))
     return redirect('home')
 
+def cart(request):
+    if request.user.is_authenticated:
+        user = request.user
+        product_id = request.GET.get("prod_id")
+        product_quantity = request.GET.get("product_quantity")
+        product = Product.objects.get(id=product_id)
+        try:
+            cart_item = Cart.objects.get(user=user, product=product)
+            cart_item.quantity = product_quantity
+            cart_item.save()
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(user=user, product=product, quantity=product_quantity)
+            cart.save()
+            return redirect("/cart")
+        
+            
+
 def show_cart(request):
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
+        ammount = 0
+        cart_product = [p for p in Cart.objects.all() if p.user == user]
+        if cart_product: 
+            for p in cart_product:
+                total_amount = (p.quantity * p.product.selling_price)
+                ammount = total_amount + ammount
+            return render(request, "shoping-cart.html", {'ammount': ammount, 'cart': cart})
+    
         return redirect('/cart')
     
 def Meat(request):

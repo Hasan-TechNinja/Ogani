@@ -68,6 +68,7 @@
                         {% comment %} <a href="{% url "shopingCart" %}" class="primary-btn">ADD TO CARD</a> {% endcomment %}
                         <form action="/shopingCart" class='d-inline'>
                             <input type="hidden" name="prod_id" value="{{sd.id}}" id="prod_id">
+                            <input type="hidden" name="product_quantity" id="product_quantity" value="1">
                             <button type="submit" class = "btn-secondary shadow px-5 py-2">ADD TO CART</button>
                         </form>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
