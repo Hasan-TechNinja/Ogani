@@ -330,9 +330,10 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    {% for n in n %}
+                                    {% comment %} {% for n in n %}
                                     <h6><span>{{n}}</span> Products found</h6>
-                                    {% endfor %}
+                                    {% endfor %} {% endcomment %}
+                                    <h6><span>{{n}}</span> Products found</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">

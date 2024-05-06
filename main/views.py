@@ -22,9 +22,7 @@ class HomeView(View):
         slAll = Product.objects.all()[5:8]
         products = all
         category = Product.objects.all()
-
         unique_categories = Category.objects.values('name').distinct()
-       
         for category in unique_categories:
             pass
 
@@ -256,3 +254,24 @@ def search(request):
             return render(request, 'search.html', {'error': 'No query provided'})
     else:
         return render(request, 'search.html', {'error': 'Invalid request method'})
+    
+
+def Fast_Food(request):
+    Productss = Product.objects.filter(category="Fast Food")[:1]
+    return render(request, 'Fast_Food.html')
+
+def Dried_Fruit(request):
+    Productss = Product.objects.filter(category="Dried Fruit")[:1]
+    return render(request, 'Dried_Fruit.html')
+
+def Vegetables(request):
+    Productss = Product.objects.filter(category="Vegetables")[:1]
+    return render(request, 'Vegetables.html')
+
+def Meat(request):
+    Productss = Product.objects.filter(category="Meat")[:1]
+    return render(request, 'Meat.html')
+
+def Drink_Fruit(request):
+    Productss = Product.objects.filter(category="Drink Fruit")[:1]
+    return render(request, 'Drink_Fruit.html')

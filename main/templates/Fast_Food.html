@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Ogani{% endblock title %}
+{% block title %}Fast Food{% endblock title %}
 {% block content %}
 
     <!-- Categories Section Begin -->
@@ -32,12 +32,9 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                           {% comment %} <li data-filter=".oranges"><a href="" class='text-secondary'>Oranges</a></li>
-                            <li data-filter=".fresh-meat"><a href="{% url "meat" %}" class='text-secondary'>Fresh Meat</a></li>
-                            <li data-filter=".vegetables"><a href="" class='text-secondary'>Vegetables</a></li>
-                            <li data-filter=".fastfood"><a href="" class='text-secondary'>Fastfood</a></li> {% endcomment %}
+                          
                             {% for cat in unique_categories %}
-                                <li data-filter=".{{ cat.name|lower }}"><a href={{cat.category}} class='text-secondary'>{{ cat.name }}</a></li>
+                                <li data-filter=".{{ cat.name|lower }}"><a href="" class='text-secondary'>{{ cat.name }}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -62,111 +59,7 @@
                     </div>
                 </div>
                 {% endfor %}
-               {% comment %} <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{p.image.url}}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">{{p.name}}</a></h6>
-                            <h5>${{p.selling_price}}</h5>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-2.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-4.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-5.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-6.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-7.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{% static "img/featured/feature-8.jpg" %}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
-                        </div>
-                    </div>
-                </div> {% endcomment %}
+              
             </div>
         </div>
     </section>
@@ -244,24 +137,7 @@
                                     </div>
                                 </a>
                                 {% endfor %}
-                                {% comment %} <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-2.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-3.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a> {% endcomment %}
+                                
                             </div>
                             <div class="latest-prdouct__slider__item">
                                 {% for p in lAll %}
@@ -275,24 +151,7 @@
                                     </div>
                                 </a>
                                 {% endfor %}
-                                {% comment %} <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-2.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-3.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a> {% endcomment %}
+                                
                             </div>
                         </div>
                     </div>
@@ -313,24 +172,7 @@
                                     </div>
                                 </a>
                                 {% endfor %}
-                                {% comment %} <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-2.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-3.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a> {% endcomment %}
+                                
                             </div>
                             <div class="latest-prdouct__slider__item">
                                 {% for p in slAll %}
@@ -344,24 +186,7 @@
                                     </div>
                                 </a>
                                 {% endfor %}
-                                {% comment %} <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-2.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{% static "img/latest-product/lp-3.jpg" %}" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a> {% endcomment %}
+                                
                             </div>
                         </div>
                     </div>
