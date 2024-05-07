@@ -58,7 +58,7 @@ class Cart(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return str(self.id)
+        return f"{self.user.username}"
     
     def linetotal(self):
         return self.product.selling_price * self.quantity
@@ -130,3 +130,14 @@ class Blog(models.Model):
     price = models.IntegerField()
     discount_price = models.IntegerField()
     
+
+class Blogs(models.Model):
+    title = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=200, blank=True, null=True)
+    long_description = models.TextField(blank=True, null=True)
+    date = models.DateField(auto_now_add=True)
+    comment = models.CharField(max_length=200, blank=True, null=True)
+    image = models.ImageField(upload_to='Blog')
+
+    def __str__(self):
+        return self.title

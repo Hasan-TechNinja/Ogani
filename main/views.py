@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
@@ -15,7 +16,9 @@ class HomeView(View):
     def get(self, request):
         all = Product.objects.all()
         fAll = Product.objects.all()[:3]
-        fAll = reversed(fAll)
+        latest=Product.objects.all().order_by('-id')[:3]
+        latest2=Product.objects.all().order_by('-id')[3:6]
+        # latest = reversed(fAll)
         sAll = Product.objects.all()[4:7]
         lAll = Product.objects.all()[7:10]
         llAll = Product.objects.all()[2:5]
@@ -44,9 +47,10 @@ class shopGridView(View):
     def get(self, request):
         all = Product.objects.all()[:12]
         fAll = Product.objects.all()[:3]
+        fAll=Product.objects.all().order_by('-id')[:3]
         AAll = Product.objects.all()
         n = str(len(AAll))
-        sAll = Product.objects.all()[4:7]
+        sAll = Product.objects.all().order_by('-id')[4:7]
         dAll = Product.objects.all()[5:11]
         return render(request, 'shop-grid.html', locals())
     
@@ -92,10 +96,15 @@ def contact(request):
     return render(request, 'contact.html')
 
 def blog(request):
-    return render(request, 'blog.html')
+    blog = Blogs.objects.all()
+    # context = {"blog":blog}
+    return render(request, 'blog.html', {'b':blog})
 
-def blogDetails(request):
-    return render(request, 'blog-details.html')
+def blogDetails(request, pk):
+    blog = Blogs.objects.get(pk=pk)
+    user = request.user
+    context = {"blog": blog, 'user': user}
+    return render(request, 'blog-details.html', context)
 
 def checkout(request):
     if request.method == 'POST':
@@ -160,22 +169,44 @@ def logout_user(request):
     messages.success(request, ("You were logged out!"))
     return redirect('home')
 
+# def cart(request):
+#     if request.user.is_authenticated:
+#         user = request.user
+#         product_id = request.GET.get("prod_id")
+#         product_quantity = request.GET.get("product_quantity")
+#         product = Product.objects.get(id=product_id)
+#         try:
+#             cart_item = Cart.objects.get(user=user, product=product)
+#             cart_item.quantity = product_quantity
+#             cart_item.save()
+#         except Cart.DoesNotExist:
+#             cart = Cart.objects.create(user=user, product=product, quantity=product_quantity)
+#             cart.save()
+#             return redirect("/cart")
+        
+            
 def cart(request):
     if request.user.is_authenticated:
         user = request.user
         product_id = request.GET.get("prod_id")
-        product_quantity = request.GET.get("product_quantity")
+        product_quantity = int(request.GET.get("product_quantity", 1))  # Default to 1 if not provided
         product = Product.objects.get(id=product_id)
+
+        # Try to update quantity if the item exists in the cart
         try:
             cart_item = Cart.objects.get(user=user, product=product)
             cart_item.quantity = product_quantity
             cart_item.save()
+        # If it doesn't exist, create a new cart item
         except Cart.DoesNotExist:
-            cart = Cart.objects.create(user=user, product=product, quantity=product_quantity)
-            cart.save()
-            return redirect("/cart")
-        
-            
+            Cart.objects.create(user=user, product=product, quantity=product_quantity)
+
+        # Redirect to the cart page after handling the request
+        return redirect("/cart")
+    
+    # If the user is not authenticated, redirect them to a login page or some other appropriate response
+    return redirect("/login")
+
 
 def show_cart(request):
     if request.user.is_authenticated:
@@ -302,3 +333,4 @@ def Meat(request):
 def Drink_Fruit(request):
     Productss = Product.objects.filter(category="Drink Fruit")[:1]
     return render(request, 'Drink_Fruit.html')
+

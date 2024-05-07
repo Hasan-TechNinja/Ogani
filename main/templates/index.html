@@ -200,7 +200,7 @@
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                {% for p in fAll %}
+                                {% for p in latest %}
                                 <a href="{% url "shopDetails" p.id %}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ p.image.url }}" alt="">
@@ -213,10 +213,10 @@
                                 {% endfor %}
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                {% for p in sAll %}
+                                {% for p in latest2 %}
                                 <a href="{% url "shopDetails" p.id %}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="{{p.image.url}}" alt="">
+                                        <img src="{{p.image.url}}" alt="" height=80px width=80px>
                                     </div>
                                     <div class="latest-product__item__text">
                                         <h6>{{p.name}}</h6>
