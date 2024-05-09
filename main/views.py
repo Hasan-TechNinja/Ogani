@@ -212,16 +212,26 @@ def show_cart(request):
     if request.user.is_authenticated:
         user = request.user
         cart = Cart.objects.filter(user=user)
-        ammount = 0
-        cart_product = [p for p in Cart.objects.all() if p.user == user]
+        
+        subtotal = 0  # Initialize subtotal
+        cart_product = [p for p in cart]  # Get all cart items for the current user
+
         if cart_product: 
+            # Calculate the subtotal by adding all line totals
             for p in cart_product:
-                total_amount = (p.quantity * p.product.selling_price)
-                ammount = total_amount + ammount
-            return render(request, "shoping-cart.html", {'ammount': ammount, 'cart': cart})
+                p.linetotal = p.quantity * p.product.selling_price  # Calculate line total for each product
+                subtotal += p.linetotal  # Add to the subtotal
+
+            return render(
+                request, 
+                "shoping-cart.html", 
+                {'cart': cart, 'subtotal': subtotal}  # Pass the calculated subtotal to the template
+            )
     
-        return redirect('/cart')
-    
+    # If no cart items, redirect to an empty cart page
+    return redirect('/cart')
+        
+        
 def Meat(request):
     all = Product.objects.all()
     fAll = Product.objects.all()[:3]

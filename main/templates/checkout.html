@@ -37,18 +37,6 @@
                             <div class="row">
                                 <form action="" method="POST">
                                     {% csrf_token %}
-                                        {% comment %} <div class="col-lg-6">
-                                            <div class="checkout__input" >
-                                                <p>Fist Name<span>*</span></p>
-                                                <input type="text" name='first_name'>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="checkout__input" >
-                                                <p>Last Name<span>*</span></p>
-                                                <input type="text" name='last_name'>
-                                            </div>
-                                        </div> {% endcomment %}
                                     </div>
                                     <div class="checkout__input" >
                                         <p>First Name<span>*</span></p>
@@ -109,11 +97,11 @@
                                 <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
                                 <div class="checkout__order__total">Total <span>$750.99</span></div>
                                 <div class="checkout__input__checkbox">
-                                    <label for="acc-or">
+                                    {% comment %} <label for="acc-or">
                                         Create an account?
                                         <input type="checkbox" id="acc-or">
                                         <span class="checkmark"></span>
-                                    </label>
+                                    </label> {% endcomment %}
                                 </div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
                                     ut labore et dolore magna aliqua.</p>
