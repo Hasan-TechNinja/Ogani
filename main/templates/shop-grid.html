@@ -165,7 +165,7 @@
                                         {% for p in sAll %}
                                         <a href="{% url "shopDetails" p.id %}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="{{p.image.url}}" alt="">
+                                                <img src="{{p.image.url}}" alt="" height='90px' widget = '100px'>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>{{p.name}}</h6>

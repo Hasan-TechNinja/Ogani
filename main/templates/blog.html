@@ -46,7 +46,7 @@
                         <div class="blog__sidebar__item">
                             <h4>Recent News</h4>
                             <div class="blog__sidebar__recent">
-                                {% for blog in b %}
+                                {% for blog in b2 %}
                                 <a href="{% url "blogDetails" blog.id %}" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
                                         <img src="{{blog.image.url}}" alt="" height = '70px' width = '70px'>

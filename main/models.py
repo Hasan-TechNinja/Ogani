@@ -122,6 +122,7 @@ class Billing_Detailss(models.Model):
     def __str__(self):
         return f"{self.usr.username}"
     
+#-----------------------------Start-----------------------------------------    
 class Blog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -129,7 +130,7 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='Blog')
     price = models.IntegerField()
     discount_price = models.IntegerField()
-    
+#-----------------------------End------------------------------------------------
 
 class Blogs(models.Model):
     title = models.CharField(max_length=100)

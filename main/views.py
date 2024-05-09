@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
-class HomeView(View):
+class HomeView(View, Blogs):
     def get(self, request):
         all = Product.objects.all()
         fAll = Product.objects.all()[:3]
@@ -28,7 +28,7 @@ class HomeView(View):
         unique_categories = Category.objects.values('name').distinct()
         for category in unique_categories:
             pass
-
+        blog = Blogs.objects.all()[:3]
         return render(request, 'index.html', locals())
     
     
