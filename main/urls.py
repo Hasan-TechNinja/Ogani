@@ -37,4 +37,7 @@ urlpatterns = [
     path('Fresh_Bananas/', views.Fresh_Onion, name='Fresh_Bananas'),
     # path('search/', views.search, name = 'search'),
     path('search/', views.search, name='search'),
+    path('order/', views.orders, name='order'),
+    path('show_order/', views.show_order, name='show_order'),
+    path('order_delete/<int:id>/',views.order_delate,name='order-delete'),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

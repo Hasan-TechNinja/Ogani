@@ -55,28 +55,6 @@ class shopGridView(View):
         return render(request, 'shop-grid.html', locals())
     
 
-
-# class shopingCartView(View):
-#     def get(self, request):
-#         user = request.user
-#         cart = Cart.objects.filter(user=user)
-#         cart_totals = [item.linetotal() for item in cart]
-#         return render(request, 'shoping-cart.html',  locals())
-
-#     def post(self, request):
-#         user = request.user
-#         product_id = request.POST.get('prod_id')
-#         product = get_object_or_404(Product, id=product_id)
-#         # cart_item, created = Cart.objects.get_or_create(user=user, product=product)
-#         created = Cart.objects.create(user=user, product = product)
-#         cart_item = Cart.objects.filter(user=user)
-#         context = {
-#             'cart_item': cart_item,
-#             'created': created, 
-#         }
-#         return render(request, 'shoping-cart.html', context)
-
-
 def contact(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -106,7 +84,7 @@ def blogDetails(request, pk):
     context = {"blog": blog, 'user': user}
     return render(request, 'blog-details.html', context)
 
-def checkout(request):
+def orders(request):
     if request.method == 'POST':
 
         first_names = request.POST.get('first_name', '') 
@@ -119,7 +97,6 @@ def checkout(request):
         zip = request.POST.get('zip', '')
         phone = request.POST.get('phone', '')
         email = request.POST.get('email', '')
-
         user = request.user
         cart = Cart.objects.filter(user=user)
 
@@ -142,9 +119,24 @@ def checkout(request):
             c.delete() 
 
         return redirect('home')
+    
+    return render(request, 'checkout.html', )
 
 
-    return render(request, 'checkout.html', {}) 
+def checkout(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.filter(user = user)
+
+        subtotal = 0  
+        cart_product = [p for p in cart]  
+
+        if cart_product: 
+            
+            for p in cart_product:
+                p.linetotal = p.quantity * p.product.selling_price 
+                subtotal += p.linetotal 
+    return render(request, 'checkout.html', locals())
 
 def main(request):
     return render(request, 'main.html')
@@ -168,43 +160,27 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You were logged out!"))
     return redirect('home')
-
-# def cart(request):
-#     if request.user.is_authenticated:
-#         user = request.user
-#         product_id = request.GET.get("prod_id")
-#         product_quantity = request.GET.get("product_quantity")
-#         product = Product.objects.get(id=product_id)
-#         try:
-#             cart_item = Cart.objects.get(user=user, product=product)
-#             cart_item.quantity = product_quantity
-#             cart_item.save()
-#         except Cart.DoesNotExist:
-#             cart = Cart.objects.create(user=user, product=product, quantity=product_quantity)
-#             cart.save()
-#             return redirect("/cart")
-        
             
 def cart(request):
     if request.user.is_authenticated:
         user = request.user
         product_id = request.GET.get("prod_id")
-        product_quantity = int(request.GET.get("product_quantity", 1))  # Default to 1 if not provided
+        product_quantity = int(request.GET.get("product_quantity", 1)) 
         product = Product.objects.get(id=product_id)
 
-        # Try to update quantity if the item exists in the cart
+       
         try:
             cart_item = Cart.objects.get(user=user, product=product)
             cart_item.quantity = product_quantity
             cart_item.save()
-        # If it doesn't exist, create a new cart item
+        
         except Cart.DoesNotExist:
             Cart.objects.create(user=user, product=product, quantity=product_quantity)
 
-        # Redirect to the cart page after handling the request
+       
         return redirect("/cart")
     
-    # If the user is not authenticated, redirect them to a login page or some other appropriate response
+   
     return redirect("/login")
 
 
@@ -213,22 +189,20 @@ def show_cart(request):
         user = request.user
         cart = Cart.objects.filter(user=user)
         
-        subtotal = 0  # Initialize subtotal
-        cart_product = [p for p in cart]  # Get all cart items for the current user
+        subtotal = 0 
+        cart_product = [p for p in cart] 
 
         if cart_product: 
-            # Calculate the subtotal by adding all line totals
+            
             for p in cart_product:
-                p.linetotal = p.quantity * p.product.selling_price  # Calculate line total for each product
-                subtotal += p.linetotal  # Add to the subtotal
+                p.linetotal = p.quantity * p.product.selling_price  
+                subtotal += p.linetotal  
 
             return render(
                 request, 
                 "shoping-cart.html", 
-                {'cart': cart, 'subtotal': subtotal}  # Pass the calculated subtotal to the template
+                {'cart': cart, 'subtotal': subtotal}  
             )
-    
-    # If no cart items, redirect to an empty cart page
     return redirect('/cart')
         
         
@@ -344,3 +318,16 @@ def Drink_Fruit(request):
     Productss = Product.objects.filter(category="Drink Fruit")[:1]
     return render(request, 'Drink_Fruit.html')
 
+# def show_order(request):
+#     order = Billing_Details.objects.filter(user = request.user)
+    
+#     return render(request, 'show_order.html', locals())
+
+def show_order(request):
+    order = Billing_Detailss.objects.filter(usr=request.user)
+    return render(request, 'show_order.html', {'order': order})
+
+def order_delate(request, id):
+    order = Billing_Detailss.objects.get(id=id)
+    order.delete()
+    return redirect(('show_order'))
