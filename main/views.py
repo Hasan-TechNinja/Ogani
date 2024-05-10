@@ -201,8 +201,9 @@ def show_cart(request):
             return render(
                 request, 
                 "shoping-cart.html", 
-                {'cart': cart, 'subtotal': subtotal}  
+                {'cart': cart, 'subtotal': subtotal}
             )
+
     return redirect('/cart')
         
         
@@ -318,10 +319,6 @@ def Drink_Fruit(request):
     Productss = Product.objects.filter(category="Drink Fruit")[:1]
     return render(request, 'Drink_Fruit.html')
 
-# def show_order(request):
-#     order = Billing_Details.objects.filter(user = request.user)
-    
-#     return render(request, 'show_order.html', locals())
 
 def show_order(request):
     order = Billing_Detailss.objects.filter(usr=request.user)
