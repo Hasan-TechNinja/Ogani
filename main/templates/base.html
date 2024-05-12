@@ -251,21 +251,22 @@
 
     
     <!-- Footer Section Begin -->
-    {% if messages %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endif %}
+   
     <footer class="footer spad">
         <div class="container">
+            {% if messages %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">

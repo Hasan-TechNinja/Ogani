@@ -31,13 +31,14 @@
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
+                            <li class="" data-filter="*">All</li>   
                            {% comment %} <li data-filter=".oranges"><a href="" class='text-secondary'>Oranges</a></li>
                             <li data-filter=".fresh-meat"><a href="{% url "meat" %}" class='text-secondary'>Fresh Meat</a></li>
                             <li data-filter=".vegetables"><a href="" class='text-secondary'>Vegetables</a></li>
                             <li data-filter=".fastfood"><a href="" class='text-secondary'>Fastfood</a></li> {% endcomment %}
                             {% for cat in unique_categories %}
-                                <li data-filter=".{{ cat.name|lower }}"><a href={{cat.category}} class='text-secondary'>{{ cat.name }}</a></li>
+                                {% comment %} <li data-filter=".{{ cat.name|lower }}"><a href={{cat.category}} class='text-secondary'>{{ cat.name }}</a></li> {% endcomment %}
+                                <li class='text-secondary'><a href="{{cat.category}}">{{ cat.name }}</a></li>
                             {% endfor %}
 
                         </ul>
