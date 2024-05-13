@@ -203,6 +203,8 @@ def show_cart(request):
                 "shoping-cart.html", 
                 {'cart': cart, 'subtotal': subtotal}
             )
+        else:
+            return render(request, )
 
     return redirect('/cart')
         

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% load static %}
 {% block title %}Fresh Food{% endblock title %}
 {% block content %}
@@ -67,9 +67,11 @@
                 {% endfor %}
                 {% else %}
                 {% comment %} <i class="fa-light fa-cart-shopping"></i> {% endcomment %}
-                <div>
-                    <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
-                    <h3 class='text-center text-danger'>Product not found</h3>
+                <div class="container text-center">
+                    <div>
+                        <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
+                        <h3 class='text-center text-danger'>Product not found</h3>
+                    </div>
                 </div>
                 {% endif %}
             </div>
