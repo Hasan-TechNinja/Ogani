@@ -39,31 +39,42 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    {% for cart in cart %}
-                                    <td class="shoping__cart__item">
-                                        <img src="{{ cart.product.image.url }}" height='100px' width='100px' alt="">
-                                        <h5>{{cart.product.name}}</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        
-                                        ${{cart.product.selling_price}}
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                    {% if cart %}
+                                        {% for cart in cart %}
+                                        <td class="shoping__cart__item">
+                                            <img src="{{ cart.product.image.url }}" height='100px' width='100px' alt="">
+                                            <h5>{{cart.product.name}}</h5>
+                                        </td>
+                                        <td class="shoping__cart__price">
+                                            
+                                            ${{cart.product.selling_price}}
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <input type="text" value="1">
+                                                </div>
                                             </div>
+                                        </td>
+                                        <td class="shoping__cart__total">
+                                            ${{cart.linetotal}}
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                            <span class="icon_close"></span>
+                                        </td>
+                                      {% endfor %}
+
+                                      {% else %}
+
+                                      <div class="container text-center">
+                                        <div>
+                                            <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
+                                            <h3 class='text-center text-danger'>Cart Empty</h3>
                                         </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        ${{cart.linetotal}}
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
+                                    </div>
+                                    {% endif %}
                                 </tr>
-                                {% endfor %}
-                                
+                                <br><br><br><br><br><br><br><br><br>
                             </tbody>
                         </table>
                     </div>

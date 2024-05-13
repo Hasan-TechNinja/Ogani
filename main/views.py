@@ -204,7 +204,8 @@ def show_cart(request):
                 {'cart': cart, 'subtotal': subtotal}
             )
         else:
-            return render(request, )
+            return render(request, 'shoping-cart.html', {'cart': cart, 'subtotal': subtotal})
+            # return render(request, "shoping-cart.html",  {'cart': cart, 'subtotal': subtotal}
 
     return redirect('/cart')
         
