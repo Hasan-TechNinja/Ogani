@@ -206,8 +206,8 @@ def show_cart(request):
         else:
             return render(request, 'shoping-cart.html', {'cart': cart, 'subtotal': subtotal})
             # return render(request, "shoping-cart.html",  {'cart': cart, 'subtotal': subtotal}
-
     return redirect('/cart')
+    
         
         
 def Meat(request):

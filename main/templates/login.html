@@ -5,33 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/login.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <!-- Move the {% load static %} tag here for better organization -->
 </head>
-<body>
-    <h2>Login</h2>
-    <div  class = 'logins'>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {% for field in form %}
-            <div>
-                {{ field.label_tag }}
-                {{ field }}
-                <small class="text-danger"> {{ field.error | striptags }}</small>
-                <br> <br>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h2 class="text-center">Login</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form-group">
+                                <label class="font-weight-bold">{{ field.label }}</label>
+                                {{ field }}
+                                <small class="text-danger">{{ field.error }}</small>
+                            </div>
+                            {% endfor %}
+                            <small><a href="#" class="text-secondary">Forgot Password?</a></small>
+                            <button type="submit" class='btn btn-success btn-block mt-3'>Login</button>
+                            <hr>
+                            <a href="{% url 'registration' %}" class="btn btn-warning btn-block">Create new account</a>
+                            {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                            <p class="alert alert-danger mt-3">{{ error }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
-            <small><a href="#">Forgot Password</a></small>
-            <input type="submit" value='Login' class='login' > <br> <br>
-            <hr>
-            <a href="{% url 'registration' %}">Create new account</a>
-            {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-            <p class="aleart aleart_danger">{{error}}</p>
-            {% endfor %}
-            {% endif %}
-        </form>
-        {% comment %} <input type="submit" value="Sing up" href='{% url "userCF" %}' class='singup'> {% endcomment %}
+        </div>
     </div>
 </body>
 </html>
