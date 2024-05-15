@@ -154,6 +154,7 @@ class CustomerRegistrationView(View):
         if form.is_valid():
             form.save()
             messages.success(request, 'Congratulations Successfully registtration done')
+            return redirect('login')
         return render(request, 'registration.html', locals())
     
 def logout_user(request):
