@@ -6,11 +6,12 @@
     <title>User Creation Form</title>
     {% load static %}
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="shortcut icon" href="{% static "image/logo.png" %}" type="image/x-icon">
     <!-- Move the {% load static %} tag here for better organization -->
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <h2 class="text-center mb-4">User Creation Form</h2>
+        <h2 class="text-center mb-4">Create new Account</h2>
         <form action="" method="POST" class="usercf p-4 bg-white shadow-sm rounded">
             {% if messages %}
             {% for message in messages %}
