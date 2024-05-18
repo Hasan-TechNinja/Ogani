@@ -38,9 +38,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% if cart %}
+                                    {% for cart in cart %}
                                 <tr>
-                                    {% if cart %}
-                                        {% for cart in cart %}
                                         <td class="shoping__cart__item">
                                             <img src="{{ cart.product.image.url }}" height='100px' width='100px' alt="">
                                             <h5>{{cart.product.name}}</h5>
@@ -62,18 +62,19 @@
                                         <td class="shoping__cart__item__close">
                                             <span class="icon_close"></span>
                                         </td>
+                                    </tr>
                                       {% endfor %}
 
                                     {% else %}
-
+                                    <tr>
                                       <div class="container text-center">
                                         <div>
                                             <img src="https://static.vecteezy.com/system/resources/previews/024/124/679/non_2x/empty-shopping-cart-side-view-on-transparent-background-png.png" height="300px" width="300px" alt="">
                                             <h3 class='text-center text-danger'>Cart Empty</h3>
                                         </div>
                                     </div>
-                                    {% endif %}
                                 </tr>
+                                {% endif %}
                                 <br><br><br><br><br><br><br><br><br>
                             </tbody>
                         </table>
